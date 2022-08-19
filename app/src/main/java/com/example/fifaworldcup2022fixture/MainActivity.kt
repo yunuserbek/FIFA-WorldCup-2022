@@ -13,6 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding:ActivityMainBinding
+    private val adapter: FixturesRecyclerAdapter by lazy { FixturesRecyclerAdapter() }
 
     lateinit var manager: RequestManager
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,8 +34,8 @@ class MainActivity : AppCompatActivity() {
 
             binding.recyclerDetails.setHasFixedSize(true)
             binding.recyclerDetails.layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
-            var fixtureAdapter: FixturesRecyclerAdapter = FixturesRecyclerAdapter(response.data)
-            binding.recyclerDetails.adapter = fixtureAdapter
+            adapter.differ.submitList(response.data)
+            binding.recyclerDetails.adapter = adapter
         }
 
         override fun didError(message: String) {
