@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.fifaworldcup2022fixture.adapter.FixtureAdapter
+import com.example.fifaworldcup2022fixture.adapter.FixturesRecyclerAdapter
 import com.example.fifaworldcup2022fixture.databinding.FragmentFixtureBinding
 import com.example.fifaworldcup2022fixture.models.FixModel
 import com.example.fifaworldcup2022fixture.viewmodel.FixtureViewModel
@@ -18,10 +18,11 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class FixtureFragment : Fragment() {
     private lateinit var binding: FragmentFixtureBinding
-    lateinit var manager: RequestManager
-    private val viewModel: FixtureViewModel by viewModels()
-   // private lateinit var fixtureAdapter: FixtureAdapter
-    private val adapter: FixtureAdapter by lazy { FixtureAdapter() }
+    //lateinit var manager: RequestManager
+    private val adapter: FixturesRecyclerAdapter by lazy { FixturesRecyclerAdapter() }
+    private val manager:RequestManager by lazy { RequestManager() }
+    //private val viewModel: FixtureViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,40 +31,31 @@ class FixtureFragment : Fragment() {
         binding = FragmentFixtureBinding.inflate(layoutInflater)
         return binding.root
 
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        manager = RequestManager()
+      //  manager = RequestManager()
         manager.getAllFixtures(fixtureResponseListener, 1331, 1)
 
 
 
     }
+
     private val fixtureResponseListener: ResponseListener = object :
         ResponseListener {
         override fun didFetch(response: FixModel, message: String) {
-            binding.recyclerFixture.setHasFixedSize(true)
-            binding.recyclerFixture.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-           adapter.setData(response.data)
-            binding.recyclerFixture.adapter = adapter
+
+            binding.recyclerDetails.setHasFixedSize(true)
+            binding.recyclerDetails.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            adapter.differ.submitList(response.data)
+            binding.recyclerDetails.adapter = adapter
         }
-
-    private fun setupRv() {
-
-
-//
-       // viewModel.datafix.observe(viewLifecycleOwner) {data->
-       //     binding.recyclerFixture.layoutManager = GridLayoutManager(requireContext(),1)
-      //     adapter.setData(data)
-        //    binding.recyclerFixture.adapter = adapter
-
-           }
 
         override fun didError(message: String) {
-            TODO("Not yet implemented")
+            TODO()
         }
-
 
     }
     }

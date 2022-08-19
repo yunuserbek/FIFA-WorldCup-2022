@@ -13,36 +13,18 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding:ActivityMainBinding
-    private val adapter: FixturesRecyclerAdapter by lazy { FixturesRecyclerAdapter() }
 
-    lateinit var manager: RequestManager
+    //lateinit var manager: RequestManager
+    private val manager:RequestManager by lazy { RequestManager() }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-
-        manager = RequestManager()
-        manager.getAllFixtures(fixtureResponseListener, 1331, 1)
+       // manager.getAllFixtures(fixtureResponseListener, 1331, 1)
 
     }
 
-    private val fixtureResponseListener: ResponseListener = object :
-        ResponseListener {
-        override fun didFetch(response: FixModel, message: String) {
-
-            binding.recyclerDetails.setHasFixedSize(true)
-            binding.recyclerDetails.layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
-            adapter.differ.submitList(response.data)
-            binding.recyclerDetails.adapter = adapter
-        }
-
-        override fun didError(message: String) {
-           TODO()
-        }
-
-    }
 
 
 

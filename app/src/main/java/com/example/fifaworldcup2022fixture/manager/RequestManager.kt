@@ -18,6 +18,7 @@ class RequestManager {
         .baseUrl("https://elenasport-io1.p.rapidapi.com/")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
+
     fun getAllFixtures(listener: ResponseListener, id: Int, page: Int){
         val call = retrofit.create(CallSeasonFixtures::class.java).callSeasonFixtures(id, page)
         call.enqueue(object : Callback<FixModel> {
