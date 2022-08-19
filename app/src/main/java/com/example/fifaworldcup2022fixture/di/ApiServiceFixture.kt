@@ -1,7 +1,9 @@
 package com.example.fifaworldcup2022fixture.di
 
+import com.example.fifaworldcup2022fixture.models.Data
 import com.example.fifaworldcup2022fixture.models.FixModel
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Path
@@ -15,10 +17,10 @@ interface ApiServiceFixture {
         "X-RapidAPI-Host: elenasport-io1.p.rapidapi.com",
         "X-RapidAPI-Key: 911311298cmsh7a078bde839f805p166501jsn304a10b39353"
     )
-    fun callSeasonFixtures(
+   suspend fun callSeasonFixtures(
         @Path("id") path: Int,
         @Query("page") page: Int
-    ): Call<FixModel>
+    ): Response<FixModel>
 }
 
 
