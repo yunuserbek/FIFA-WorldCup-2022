@@ -11,8 +11,8 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class NetworkModule {
-    /*
+object NetworkModule {
+
     @Singleton
     @Provides
     fun retrofitInstance(): Retrofit {
@@ -22,10 +22,10 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun apiFactory(retrofit: Retrofit) = retrofit.create(ApiServiceFixture::class.java)
+    fun apiFactory(retrofit: Retrofit): ApiServiceFixture = retrofit.create(ApiServiceFixture::class.java)
 
 
-     */
+
 
 }
 

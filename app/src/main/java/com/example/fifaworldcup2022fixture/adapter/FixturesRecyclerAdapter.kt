@@ -18,7 +18,7 @@ class FixturesRecyclerAdapter() :
     }
 
 
-    private val differCallback = object : DiffUtil.ItemCallback<Data>(){
+    private val differCallback = object : DiffUtil.ItemCallback<Data>() {
         override fun areItemsTheSame(oldItem: Data, newItem: Data): Boolean {
             return oldItem.id == newItem.id
         }
@@ -28,7 +28,7 @@ class FixturesRecyclerAdapter() :
         }
 
     }
-    val differ = AsyncListDiffer(this,differCallback)
+    val differ = AsyncListDiffer(this, differCallback)
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FixturesViewHolder {
