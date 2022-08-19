@@ -8,13 +8,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fifaworldcup2022fixture.R
+import com.example.fifaworldcup2022fixture.models.Data
 import com.example.soccerzone.listeners.ClickListener
-import com.example.soccerzone.models.Fixture
 import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
 import java.util.*
 
-class FixturesRecyclerAdapter(val context: Context, val list: List<Fixture>, val listener: ClickListener<Fixture>)
+class FixturesRecyclerAdapter(val context: Context, val list: List<Data>)
     : RecyclerView.Adapter<FixturesViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FixturesViewHolder {
         val layout = LayoutInflater.from(context).inflate(R.layout.item_fixture, parent, false)

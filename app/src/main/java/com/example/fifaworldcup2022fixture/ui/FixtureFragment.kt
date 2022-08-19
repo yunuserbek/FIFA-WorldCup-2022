@@ -9,11 +9,10 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fifaworldcup2022fixture.adapter.FixtureAdapter
 import com.example.fifaworldcup2022fixture.databinding.FragmentFixtureBinding
+import com.example.fifaworldcup2022fixture.models.FixModel
 import com.example.fifaworldcup2022fixture.viewmodel.FixtureViewModel
 import com.example.soccerzone.listeners.ResponseListener
 import com.example.soccerzone.manager.RequestManager
-import com.example.soccerzone.models.FixtureResponse
-import com.example.soccerzone.models.SeasonData
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -41,9 +40,9 @@ class FixtureFragment : Fragment() {
 
 
     }
-    private val fixtureResponseListener: ResponseListener<FixtureResponse> = object :
-        ResponseListener<FixtureResponse> {
-        override fun didFetch(response: FixtureResponse, message: String) {
+    private val fixtureResponseListener: ResponseListener<FixModel> = object :
+        ResponseListener<FixModel> {
+        override fun didFetch(response: FixModel, message: String) {
             binding.recyclerFixture.setHasFixedSize(true)
             binding.recyclerFixture.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
            adapter.setData(response.data)

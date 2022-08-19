@@ -7,11 +7,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fifaworldcup2022fixture.databinding.ItemFixtureBinding
 import com.example.fifaworldcup2022fixture.models.Data
-import com.example.soccerzone.models.Fixture
 
 class FixtureAdapter:RecyclerView.Adapter<FixtureAdapter.FixtureViewHolder>() {
     class FixtureViewHolder(val binding: ItemFixtureBinding): RecyclerView.ViewHolder(binding.root)
-    var fixtur = emptyList<Fixture>()
+    var fixtur = emptyList<Data>()
 
     private val differCallback = object : DiffUtil.ItemCallback<Data>(){
         override fun areItemsTheSame(oldItem: Data, newItem: Data): Boolean {
@@ -44,7 +43,7 @@ class FixtureAdapter:RecyclerView.Adapter<FixtureAdapter.FixtureViewHolder>() {
     }
 
     override fun getItemCount() = differ.currentList.size
-    fun setData(newData: List<Fixture>){
+    fun setData(newData: List<Data>){
         fixtur = newData
         notifyDataSetChanged()
     }

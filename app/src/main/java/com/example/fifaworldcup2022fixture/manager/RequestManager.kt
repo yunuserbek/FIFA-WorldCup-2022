@@ -1,9 +1,8 @@
 package com.example.soccerzone.manager
 
 import android.content.Context
+import com.example.fifaworldcup2022fixture.models.FixModel
 import com.example.soccerzone.listeners.ResponseListener
-import com.example.soccerzone.models.FixtureResponse
-import com.example.soccerzone.models.SeasonsResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,12 +18,12 @@ class RequestManager(context: Context) {
         .baseUrl("https://elenasport-io1.p.rapidapi.com/")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
-    fun getAllFixtures(listener: ResponseListener<FixtureResponse>, id: Int, page: Int){
+    fun getAllFixtures(listener: ResponseListener<FixModel>, id: Int, page: Int){
         val call = retrofit.create(CallSeasonFixtures::class.java).callSeasonFixtures(id, page)
-        call.enqueue(object : Callback<FixtureResponse> {
+        call.enqueue(object : Callback<FixModel> {
             override fun onResponse(
-                call: Call<FixtureResponse>,
-                response: Response<FixtureResponse>
+                call: Call<FixModel>,
+                response: Response<FixModel>
             ) {
                 if (!response.isSuccessful){
                     listener.didError(response.message())
@@ -33,7 +32,7 @@ class RequestManager(context: Context) {
                 response.body()?.let { listener.didFetch(it, response.message()) }
             }
 
-            override fun onFailure(call: Call<FixtureResponse>, t: Throwable) {
+            override fun onFailure(call: Call<FixModel>, t: Throwable) {
                 t.message?.let { listener.didError(it) }
             }
 
@@ -49,7 +48,7 @@ class RequestManager(context: Context) {
         fun callSeasonFixtures(
             @Path("id") path: Int,
             @Query("page") page: Int
-        ): Call<FixtureResponse>
+        ): Call<FixModel>
     }
 
 }
