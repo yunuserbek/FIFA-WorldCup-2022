@@ -13,12 +13,12 @@ import retrofit2.http.Headers
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-class RequestManager(context: Context) {
+class RequestManager {
     var retrofit = Retrofit.Builder()
         .baseUrl("https://elenasport-io1.p.rapidapi.com/")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
-    fun getAllFixtures(listener: ResponseListener<FixModel>, id: Int, page: Int){
+    fun getAllFixtures(listener: ResponseListener, id: Int, page: Int){
         val call = retrofit.create(CallSeasonFixtures::class.java).callSeasonFixtures(id, page)
         call.enqueue(object : Callback<FixModel> {
             override fun onResponse(

@@ -34,14 +34,14 @@ class FixtureFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        manager = RequestManager(requireContext())
+        manager = RequestManager()
         manager.getAllFixtures(fixtureResponseListener, 1331, 1)
 
 
 
     }
-    private val fixtureResponseListener: ResponseListener<FixModel> = object :
-        ResponseListener<FixModel> {
+    private val fixtureResponseListener: ResponseListener = object :
+        ResponseListener {
         override fun didFetch(response: FixModel, message: String) {
             binding.recyclerFixture.setHasFixedSize(true)
             binding.recyclerFixture.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)

@@ -22,18 +22,18 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        manager = RequestManager(this)
+        manager = RequestManager()
         manager.getAllFixtures(fixtureResponseListener, 1331, 1)
 
     }
 
-    private val fixtureResponseListener: ResponseListener<FixModel> = object :
-        ResponseListener<FixModel> {
+    private val fixtureResponseListener: ResponseListener = object :
+        ResponseListener {
         override fun didFetch(response: FixModel, message: String) {
 
             binding.recyclerDetails.setHasFixedSize(true)
             binding.recyclerDetails.layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
-            var fixtureAdapter: FixturesRecyclerAdapter = FixturesRecyclerAdapter(this@MainActivity, response.data)
+            var fixtureAdapter: FixturesRecyclerAdapter = FixturesRecyclerAdapter(response.data)
             binding.recyclerDetails.adapter = fixtureAdapter
         }
 
